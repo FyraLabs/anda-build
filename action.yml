@@ -21,13 +21,13 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Install DNF plugins
+    - name: Install DNF Plugins
       shell: bash
-      run: dnf5 in -y dnf-plugins-core
+      run: dnf in -y dnf-plugins-core
     - name: Add repository
       shell: bash
       if: inputs.andaRepo
-      run: dnf5 config-manager addrepo --from-repofile=${{ inputs.andaRepo }}
+      run: dnf config-manager addrepo --from-repofile=${{ inputs.andaRepo }}
     - name: Add extra repositories
       shell: bash
       if: inputs.extraInitRepos
@@ -39,12 +39,12 @@ runs:
         done
     - name: Install packages
       shell: bash
-      run: dnf5 in -y createrepo_c git gcc curl wget anda
+      run: dnf in -y createrepo_c git gcc curl wget anda
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         submodules: "recursive"
         fetch-depth: 1
-    - name: Set up git repository
+    - name: Set Up Git Repository
       shell: bash
       run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
     - name: Build with Anda
